@@ -15,3 +15,17 @@ cap = cv2.VideoCapture(1)
 cap.set(3, wCam)
 cap.set(4, hCam)
 pTime = 0
+
+detector = htm.handDetector(detectionCon=0.7)
+
+devices = AudioUtilities.GetSpeakers()
+interface = devices.Activate(
+    IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+volume = cast(interface, POINTER(IAudioEndpointVolume))
+# volume.GetMute()
+# volume.GetMasterVolumeLevel()
+volRange = volume.GetVolumeRange()
+minVol = volRange[0]
+maxVol = volRange[1]
+vol = 0
+volBar = 400
